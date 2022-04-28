@@ -6,9 +6,30 @@ function setup() {
     textFont('Inter');
     textSize(16);
 
+    rectMode(CENTER);
+
     game = new Asteriodgame();
 }
 
 function draw() {
     background(220);
+    game.run();
 }
+
+function keyPressed() {
+    if (keyCode === 65) {
+        game.player.x -= 5;
+    }
+    return false;
+}
+
+function keyReleased() {
+    if (keyCode === 65) {
+        game.player.x = game.player.x;
+    }
+    return false;
+}
+
+// function keyTyped() {
+//     console.log(key);
+// }
