@@ -1,0 +1,3 @@
+class Enemies extends Component {
+
+}
