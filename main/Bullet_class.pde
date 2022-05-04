@@ -15,6 +15,7 @@ class Bullet extends Component {
     stroke(0);
     strokeWeight(4);
     point(pos.x, pos.y);
+    noStroke();
     popMatrix();
   }
 }

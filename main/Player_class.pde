@@ -5,10 +5,15 @@ class Player extends Component {
   float rotation = 0;
   boolean isBoosting = false;
   boolean isShooting = false;
+  boolean displayMirrorPlayer = false;
+  
+  int hp = 3;
   
   float hitboxSize = 20;
   
   ArrayList<Bullet> allBullets = new ArrayList<Bullet>();
+  
+  float fuel = 100;
 
   Player() {
     pos = new PVector(width/2, height/2);
@@ -17,6 +22,8 @@ class Player extends Component {
   }
 
   void display() {
+    fill(255);
+    
     pushMatrix();
     stroke(0);
     strokeWeight(1);
@@ -26,7 +33,9 @@ class Player extends Component {
     line(0, 0, 0, -10);
     popMatrix();
 
-    edgeCheck();
+    if (displayMirrorPlayer) {
+      edgeCheck();
+    }
     
     for (Bullet b : allBullets) {
       b.display();
@@ -38,6 +47,10 @@ class Player extends Component {
 
     if (isBoosting == true) {
       throttle();
+    }
+    
+    if (fuel <= 0) {
+      isBoosting = false;
     }
     
     if (isShooting == true) {
@@ -69,42 +82,30 @@ class Player extends Component {
   }
 
   void edgeCheck() {
-    if (this.pos.x > width + hitboxSize) {
-      this.pos.x = -hitboxSize;
-    } else if (this.pos.x < -hitboxSize) {
-      this.pos.x = width + hitboxSize;
+    if (pos.x >= width + hitboxSize) {
+      pos.x = -hitboxSize;
+    } else if (pos.x <= -hitboxSize) {
+      pos.x = width + hitboxSize;
     }
-    if (this.pos.y > height + hitboxSize) {
-      this.pos.y = -hitboxSize;
-    } else if (this.pos.y < -hitboxSize) {
-      this.pos.y = height + hitboxSize;
+    if (pos.y >= height + hitboxSize) {
+      pos.y = -hitboxSize;
+    } else if (pos.y <= -hitboxSize) {
+      pos.y = height + hitboxSize;
     }
-
-    //if (this.pos.x >= width - 10) {
-    //  edgePlayer(pos.x - width, pos.y, true);
-    //} else if (this.pos.x <= 10) {
-    //  edgePlayer(pos.x + width, pos.y, true);
-    //} else {
-    //  edgePlayer(0, 0, false);
-    //}
-
-    //if (this.pos.y >= height - 10) {
-    //  edgePlayer(pos.x, pos.y - height, true);
-    //} else if (this.pos.y <= 10) {
-    //  edgePlayer(pos.x, pos.y + height, true);
-    //} else {
-    //  edgePlayer(0, 0, false);
-    //}
   }
 
   void throttle() {
     PVector force = new PVector().fromAngle(heading);
     force.mult(0.1);
     vel.add(force);
+    
+    fuel -= 0.15;
   }
 
   void throttling(boolean b) {
-    isBoosting = b;
+    if (fuel > 0) {
+      isBoosting = b;
+    }
   }
 
   void turn() {
