@@ -14,6 +14,7 @@ class Player extends Component {
   ArrayList<Bullet> allBullets = new ArrayList<Bullet>();
   
   float fuel = 100;
+  float fuelCap = 100;
 
   Player() {
     pos = new PVector(width/2, height/2);
