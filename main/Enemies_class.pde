@@ -1,3 +1,3 @@
 class Enemies extends Component {
-
+  
 }

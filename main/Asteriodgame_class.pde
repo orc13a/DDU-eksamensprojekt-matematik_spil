@@ -9,7 +9,7 @@ class Asteriodgame {
     rectMode(CENTER);
     player = new Player();
     
-    allTankStation.add(new TankStation(new PVector(100, 100), player));
+    allTankStation.add(new TankStation(new PVector(random(50, width-50), random(50, height-50)), player));
   }
   
   void run() {

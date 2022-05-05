@@ -12,8 +12,12 @@ class TankStation extends Component {
   }
 
   void display () {
+    println(playerAtStation());
     if (hasGivenFuel == false) {
-      rect(pos.x, pos.x, w, h);
+      pushMatrix();
+      translate(pos.x, pos.y);
+      rect(0, 0, w, h);
+      popMatrix();
     }
   }
 
@@ -30,9 +34,12 @@ class TankStation extends Component {
       }
     }
   }
-
+  
   boolean playerAtStation() {
-    if (player.pos.x >= pos.x - w/2 && player.pos.x <= pos.x + w/2 && player.pos.y >= pos.y - h/2 && player.pos.y <= pos.y + h/2) {
+    println(player.pos);
+    println(pos);
+    println('-');
+    if (player.pos.x >= pos.x - w/2 && player.pos.x <= pos.x + w/2 && player.pos.y >= (pos.y - h/2) && player.pos.y <= (pos.y + h/2)) {
       return true;
     } else {
       return false;

@@ -4,4 +4,5 @@ class Component {
   PVector loc = new PVector();
   PVector vel = new PVector();
   PVector spd = new PVector();
+  PImage image;
 }
