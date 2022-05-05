@@ -40,7 +40,7 @@ class Asteriodgame {
     
     for (TankStation t : allTankStation) {
       if (t.hasGivenFuel == true) {
-        allTankStation.remove(t);
+        //allTankStation.remove(t);
       }
     }
   }

@@ -118,7 +118,11 @@ class Player extends Component {
   }
 
   void controlsReleased() {
-    if (key == 'a' || keyCode == LEFT || key == 'd' || keyCode == RIGHT) {
+    if (key == 'a' || keyCode == LEFT) {
+      setRotation(0);
+    }
+    
+    if (key == 'd' || keyCode == RIGHT) {
       setRotation(0);
     }
 
