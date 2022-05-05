@@ -3,7 +3,7 @@ class Asteriod extends Component {
   
   Asteriod() {
     image = loadImage("asteriod_1.png");
-    size = random(10, 50);
+    size = random(50, 100);
     
     float ranX = random(0, width);
     float ranY = random(-100, (0 - size));
@@ -19,7 +19,7 @@ class Asteriod extends Component {
     pos.add(vel);
   }
   
-  void setMove() {
-    
+  void setMove(PVector spd) {
+    vel.add(spd);
   }
 }

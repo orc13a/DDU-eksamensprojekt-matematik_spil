@@ -12,13 +12,20 @@ class TankStation extends Component {
   }
 
   void display () {
-    println(playerAtStation());
     if (hasGivenFuel == false) {
       pushMatrix();
       translate(pos.x, pos.y);
       rect(0, 0, w, h);
       popMatrix();
     }
+  }
+  
+  void update() {
+    pos.add(vel);
+  }
+  
+  void setMove(PVector spd) {
+    vel.add(spd);
   }
 
   void giveFuel() {
@@ -36,9 +43,6 @@ class TankStation extends Component {
   }
   
   boolean playerAtStation() {
-    println(player.pos);
-    println(pos);
-    println('-');
     if (player.pos.x >= pos.x - w/2 && player.pos.x <= pos.x + w/2 && player.pos.y >= (pos.y - h/2) && player.pos.y <= (pos.y + h/2)) {
       return true;
     } else {
