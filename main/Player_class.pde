@@ -15,6 +15,9 @@ class Player extends Component {
   
   float fuel = 100;
   float fuelCap = 100;
+  
+  int bullets = 100;
+  int bulletsCap = 100;
 
   Player() {
     pos = new PVector(width/2, height/2);
@@ -54,10 +57,11 @@ class Player extends Component {
       isBoosting = false;
     }
     
-    if (isShooting == true) {
+    if (isShooting == true && bullets > 0) {
       if (frameCount % 5 == 0) {
         Bullet b = new Bullet(pos, heading);
         allBullets.add(b);
+        bullets--;
       }
     }
 

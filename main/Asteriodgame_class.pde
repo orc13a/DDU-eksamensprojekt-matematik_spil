@@ -59,10 +59,13 @@ class Asteriodgame {
     rectMode(CENTER);
     
     // Liv
-    text("Liv: ", 400, height - 25);
+    text("Liv: ", 475, height - 25);
     for (int i = 1; i <= player.hp; i++) {
-      rect(425 + (15 * i), height - 30, 10, 10);
+      rect(500 + (15 * i), height - 30, 10, 10);
     }
+    
+    // Skud
+    text("Skud: " + player.bullets + " / " + player.bulletsCap, 250, height - 25);
   }
   
   void controls() {
