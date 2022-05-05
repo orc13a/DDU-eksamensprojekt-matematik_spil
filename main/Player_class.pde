@@ -92,11 +92,18 @@ class Player extends Component {
     } else if (pos.x <= -hitboxSize) {
       pos.x = width + hitboxSize;
     }
-    if (pos.y >= height + hitboxSize) {
-      pos.y = -hitboxSize;
-    } else if (pos.y <= -hitboxSize) {
-      pos.y = height + hitboxSize;
+    
+    if (pos.y >= height - hitboxSize/2) {
+      pos.y = height - hitboxSize/2;
+    } else if (pos.y <= hitboxSize/2) {
+      pos.y = hitboxSize/2;
     }
+    
+    //if (pos.y >= height + hitboxSize) {
+    //  pos.y = -hitboxSize;
+    //} else if (pos.y <= -hitboxSize) {
+    //  pos.y = height + hitboxSize;
+    //}
   }
 
   void throttle() {
