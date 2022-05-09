@@ -1,7 +1,6 @@
 class Asteriodgame {
   Player player;
-  ArrayList<TankStation> allTankStations = new ArrayList<TankStation>();
-  ArrayList<Asteriod> allAsteriods = new ArrayList<Asteriod>();
+  Level level;
   
   Asteriodgame() {
     surface.setTitle("Matematik spil");
@@ -10,14 +9,7 @@ class Asteriodgame {
     imageMode(CENTER);
     rectMode(CENTER);
     player = new Player();
-    
-    TankStation t = new TankStation(new PVector(random(50, width-50), random(50, height-50)), player);
-    t.setMove(new PVector(0, 1));
-    allTankStations.add(t);
-    
-    Asteriod a = new Asteriod();
-    a.setMove(new PVector(0, 1));
-    allAsteriods.add(a);
+    level = new Level(player);
   }
   
   void run() {
@@ -29,33 +21,16 @@ class Asteriodgame {
     clear();
     background(255);
     
-    for (TankStation t : allTankStations) {
-      t.display();
-    }
-    
+    level.display();
     player.display();
-    
-    for (Asteriod a : allAsteriods) {
-      a.display();
-    }
-    
     ui();
+    
+    btn.display();
   }
   
   void update() {
     player.update();
-    
-    for (TankStation t : allTankStations) {
-      t.update();
-      
-      if (t.playerAtStation() == true) {
-        t.giveFuel();
-      }
-    }
-    
-    for (Asteriod a : allAsteriods) {
-      a.update();
-    }
+    level.update();
   }
   
   void ui() {
