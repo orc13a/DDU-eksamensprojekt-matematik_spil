@@ -2,6 +2,10 @@ class Asteriodgame {
   Player player;
   Level level;
   
+  int tabel = 2;
+  
+  MathPopup m;
+  
   Asteriodgame() {
     surface.setTitle("Matematik spil");
     frameRate(60);
@@ -9,7 +13,9 @@ class Asteriodgame {
     imageMode(CENTER);
     rectMode(CENTER);
     player = new Player();
-    level = new Level(player);
+    level = new Level(player, tabel);
+    
+    m = new MathPopup("Hvad er 2 ⋅ 2?", 4, tabel);
   }
   
   void run() {
@@ -22,15 +28,16 @@ class Asteriodgame {
     background(255);
     
     level.display();
-    player.display();
+    //player.display();
     ui();
     
-    btn.display();
+    //m.display();
   }
   
   void update() {
-    player.update();
+    //player.update();
     level.update();
+    //m.update();
   }
   
   void ui() {
