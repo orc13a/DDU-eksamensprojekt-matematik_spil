@@ -56,7 +56,7 @@ class Asteriodgame {
     // Skud
     text("Skud: " + player.bullets + " / " + player.bulletsCap, 230, height - 25);
     
-    text("Point: 0", 390, height - 25);
+    text("Point: " + player.points, 390, height - 25);
     
     // Liv
     text("Liv: ", 500, height - 25);

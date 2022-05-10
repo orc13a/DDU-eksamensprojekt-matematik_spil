@@ -18,6 +18,7 @@ class Player extends Component {
   
   int bullets = 100;
   int bulletsCap = 100;
+  int points = 0;
 
   Player() {
     pos = new PVector(width/2, height/2);

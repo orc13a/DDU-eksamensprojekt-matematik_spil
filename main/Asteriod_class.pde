@@ -5,6 +5,8 @@ class Asteriod extends Component {
 
   boolean destroyed = false;
   boolean givenDamage = false;
+  
+  int destroyedFrameCount;
 
   Asteriod(Player p) {
     player = p;
@@ -22,10 +24,21 @@ class Asteriod extends Component {
     if (destroyed == false) {
       image(image, pos.x, pos.y, size, size);
     }
+    
+    //else if (destroyedFrameCount + 120 > frameCount) {
+    //  fill(0);
+    //  textSize(20);
+    //  textAlign(CENTER);
+    //  text(int(size + 50), pos.x, pos.y);
+    //  textAlign(LEFT);
+    //  textSize(12);
+    //}
   }
 
   void update() {
-    pos.add(vel);
+    if (destroyed == false) {
+      pos.add(vel);
+    }
     playerCollision();
     bulletCollision();
   }
@@ -35,24 +48,30 @@ class Asteriod extends Component {
   }
 
   void playerCollision() {
-    float dist = dist(pos.x, pos.y, player.pos.x, player.pos.y);
+    if (destroyed == false) {
+      float dist = dist(pos.x, pos.y, player.pos.x, player.pos.y);
 
-    if (dist < (size/2) + (player.hitboxSize/2) && givenDamage == false) {
-      player.hp -= 1;
-      givenDamage = true;
-    }
-    
-    if (dist > (size/2) + (player.hitboxSize/2) && givenDamage == true) {
-      givenDamage = false;
+      if (dist < (size/2) + (player.hitboxSize/2) && givenDamage == false) {
+        player.hp -= 1;
+        givenDamage = true;
+      }
+
+      if (dist > (size/2) + (player.hitboxSize/2) && givenDamage == true) {
+        givenDamage = false;
+      }
     }
   }
 
   void bulletCollision() {
-    for (Bullet b : player.allBullets) {
-      float dist = dist(pos.x, pos.y, b.pos.x, b.pos.y);
+    if (destroyed == false) {
+      for (Bullet b : player.allBullets) {
+        float dist = dist(pos.x, pos.y, b.pos.x, b.pos.y);
 
-      if (dist < size/2) {
-        destroyed = true;
+        if (dist < size/2 - 5) {
+          destroyed = true;
+          //player.points += size + 50;
+          //destroyedFrameCount = frameCount;
+        }
       }
     }
   }
