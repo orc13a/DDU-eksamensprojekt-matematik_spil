@@ -37,7 +37,7 @@ class Asteriodgame {
   void update() {
     //player.update();
     level.update();
-    //m.update();
+    m.update();
   }
   
   void ui() {

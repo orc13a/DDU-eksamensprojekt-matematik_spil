@@ -1,7 +1,7 @@
 class TankStation extends Component {
   Player player;
 
-  float fuel = 20;
+  float fuel = random(20, 60);
   boolean hasGivenFuel = false; 
 
   TankStation(PVector pos_, Player p) {

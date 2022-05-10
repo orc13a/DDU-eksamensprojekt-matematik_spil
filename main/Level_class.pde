@@ -10,13 +10,17 @@ class Level {
     player = p;
     tabel = tabel_;
     
-    TankStation t = new TankStation(new PVector(random(50, width-50), random(50, height-50)), player);
-    t.setMove(new PVector(0, 1));
-    allTankStations.add(t);
+    //TankStation t = new TankStation(new PVector(random(50, width-50), random(50, height-50)), player);
+    //t.setMove(new PVector(0, 1));
+    //allTankStations.add(t);
     
-    Asteriod a = new Asteriod(player);
-    a.setMove(new PVector(0, 1));
-    allAsteriods.add(a);
+    Asteriod a1 = new Asteriod(player, this);
+    a1.setMove(new PVector(0, 1));
+    allAsteriods.add(a1);
+    
+    Asteriod a2 = new Asteriod(player, this);
+    a2.setMove(new PVector(0, 1));
+    allAsteriods.add(a2);
   }
   
   void display() {
@@ -44,6 +48,22 @@ class Level {
     
     for (Asteriod a : allAsteriods) {
       a.update();
+    }
+    
+    if (frameCount % 360 == 0) {
+      TankStation t = new TankStation(new PVector(random(50, width-50), random(0, -100)), player);
+      t.setMove(new PVector(0, 1));
+      allTankStations.add(t);
+    }
+    
+    if (frameCount % 240 == 0) {
+      int addCount = int(random(1, 4));
+      
+      for (int i = 1; i <= addCount; i++) {
+        Asteriod a = new Asteriod(player, this);
+        a.setMove(new PVector(0, 1));
+        allAsteriods.add(a);
+      }
     }
   }
 }

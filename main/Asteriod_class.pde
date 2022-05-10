@@ -2,14 +2,16 @@ class Asteriod extends Component {
   float size;
 
   Player player;
+  Level level;
 
   boolean destroyed = false;
   boolean givenDamage = false;
   
   int destroyedFrameCount;
 
-  Asteriod(Player p) {
+  Asteriod(Player p, Level l) {
     player = p;
+    level = l;
 
     image = loadImage("asteriod_1.png");
     size = random(50, 100);
@@ -41,6 +43,7 @@ class Asteriod extends Component {
     }
     playerCollision();
     bulletCollision();
+    tankStationCollision();
   }
 
   void setMove(PVector spd) {
@@ -71,6 +74,18 @@ class Asteriod extends Component {
           destroyed = true;
           //player.points += size + 50;
           //destroyedFrameCount = frameCount;
+        }
+      }
+    }
+  }
+  
+  void tankStationCollision() {
+    if (destroyed == false) {
+      for (TankStation t : level.allTankStations) {
+        float dist = dist(pos.x, pos.y, t.pos.x, t.pos.y);
+        
+        if (dist < size/2) {
+          destroyed = true;
         }
       }
     }
