@@ -1,6 +1,8 @@
 class Button extends Component {
   boolean isHidden = true;
   String text = "";
+  
+  int tabelValue = 0;
 
   Button(String text_, float x_, float y_, float w_, float h_) {
     text = text_;

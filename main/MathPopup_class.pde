@@ -108,6 +108,11 @@ class MathPopup extends Component {
 
     for (int i = 0; i < 3; i++) {
       int falseAnswer = tabel * int(random(1, 11));
+      
+      while (falseAnswer == answer) {
+        falseAnswer = tabel * int(random(1, 11));
+      }
+      
       Button b = new Button(str(falseAnswer), (150 + (i + 1) * 75), (height/2) + 50, 45, 45);
       b.setHidden(false);
 

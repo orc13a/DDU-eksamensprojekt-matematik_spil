@@ -1,5 +1,6 @@
 class Asteriod extends Component {
   float size;
+  float rotated = random(0, 360);
 
   Player player;
   Level level;
@@ -24,7 +25,11 @@ class Asteriod extends Component {
 
   void display() {
     if (destroyed == false) {
-      image(image, pos.x, pos.y, size, size);
+      pushMatrix();
+      translate(pos.x, pos.y);
+      rotate(rotated);
+      image(image, 0, 0, size, size);
+      popMatrix();
     }
     
     //else if (destroyedFrameCount + 120 > frameCount) {

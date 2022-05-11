@@ -32,7 +32,6 @@ class Input extends Component {
   }
   
   void update() {
-    println(clicked());
     input();
   }
 
