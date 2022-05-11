@@ -3,6 +3,7 @@ class Level {
 
   ArrayList<TankStation> allTankStations = new ArrayList<TankStation>();
   ArrayList<Asteriod> allAsteriods = new ArrayList<Asteriod>();
+  ArrayList<Enemy> allEnemies = new ArrayList<Enemy>();
 
   int tabel;
   int showQuestion;
@@ -36,16 +37,16 @@ class Level {
     }
 
     player.display();
+    
+    for (Enemy e : allEnemies) {
+      e.display();
+    }
 
     for (Asteriod a : allAsteriods) {
       a.display();
     }
 
-    //try {
     question.display();
-    //} 
-    //catch(Exception e) {
-    //}
   }
 
   void update() {
@@ -77,6 +78,10 @@ class Level {
 
     if (isLevelPaused == false) {
       player.update();
+      
+      for (Enemy e : allEnemies) {
+        e.update();
+      }
 
       for (Asteriod a : allAsteriods) {
         a.update();
@@ -100,6 +105,11 @@ class Level {
 
       if (frameCount % 120 == 0) {
         showQuestion = int(random(0, 20));
+      }
+      
+      if (frameCount % 300 == 0) {
+        Enemy e = new Enemy(player);
+        allEnemies.add(e);
       }
     }
 

@@ -1,4 +1,6 @@
 class Player extends Component {
+  Level level;
+  
   float heading = 0;
   PVector v;
   float angle = 0.15;
