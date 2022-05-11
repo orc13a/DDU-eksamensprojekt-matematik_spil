@@ -42,7 +42,7 @@ class Asteriod extends Component {
       pos.add(vel);
     }
     playerCollision();
-    bulletCollision();
+    //bulletCollision();
     tankStationCollision();
   }
 

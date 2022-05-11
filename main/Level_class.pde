@@ -5,12 +5,17 @@ class Level {
   ArrayList<Asteriod> allAsteriods = new ArrayList<Asteriod>();
 
   int tabel;
+  int showQuestion;
+
+  MathPopup question;
 
   boolean isLevelPaused = false;
 
   Level(Player p, int tabel_) {
     player = p;
     tabel = tabel_;
+    
+    question = new MathPopup(this);
 
     //TankStation t = new TankStation(new PVector(random(50, width-50), random(50, height-50)), player);
     //t.setMove(new PVector(0, 1));
@@ -35,20 +40,42 @@ class Level {
     for (Asteriod a : allAsteriods) {
       a.display();
     }
+
+    //try {
+    question.display();
+    //} 
+    //catch(Exception e) {
+    //}
   }
 
   void update() {
-    if (isLevelPaused == false) {
-      for (TankStation t : allTankStations) {
+    for (TankStation t : allTankStations) {
+      if (isLevelPaused == false) {
         t.update();
-
-        if (t.playerAtStation() == true) {
-          isLevelPaused = true;
-          t.question.isDisplay = true;
-          //t.giveFuel();
-        }
       }
 
+      if (t.playerAtStation() == true && t.hasGivenFuel == false) {
+        t.question.isDisplay = true;
+        if (isLevelPaused == false) {
+          isLevelPaused = true;
+          player.isStoped = true;
+          player.isBoosting = false;
+        }
+
+        if (t.question.AnwserButtonsClick() == "rigtig") {
+          t.giveFuel();
+          //t.hasGivenFuel = true; // For at fjerne den igen
+          t.question.isDisplay = false;
+          isLevelPaused = false;
+        } else if (t.question.AnwserButtonsClick() == "forkert") {
+          t.hasGivenFuel = true; // For at fjerne den igen
+          t.question.isDisplay = false;
+          isLevelPaused = false;
+        }
+      }
+    }
+
+    if (isLevelPaused == false) {
       player.update();
 
       for (Asteriod a : allAsteriods) {
@@ -70,6 +97,35 @@ class Level {
           allAsteriods.add(a);
         }
       }
+
+      if (frameCount % 120 == 0) {
+        showQuestion = int(random(0, 20));
+      }
+    }
+
+    if (showQuestion == 1 && isLevelPaused == false && frameCount > 240) {
+      question = new MathPopup(this);
+      question.isDisplay = true;
+      isLevelPaused = true;
+      player.isStoped = true;
+      player.isBoosting = false;
+    }
+
+    if (isLevelPaused == true && frameCount > 240) {
+      if (question.AnwserButtonsClick() == "rigtig") {
+        player.bullets += 10;
+        player.points += 100;
+        question.isDisplay = false;
+        isLevelPaused = false;
+        showQuestion = 0;
+      } else if (question.AnwserButtonsClick() == "forkert") {
+        question.isDisplay = false;
+        isLevelPaused = false;
+      }
+    }
+
+    for (TankStation t : allTankStations) {
+      t.question.display();
     }
   }
 

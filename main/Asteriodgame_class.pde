@@ -54,7 +54,8 @@ class Asteriodgame {
     rectMode(CENTER);
     
     // Skud
-    text("Skud: " + player.bullets + " / " + player.bulletsCap, 230, height - 25);
+    //text("Skud: " + player.bullets + " / " + player.bulletsCap, 230, height - 25);
+    text("Skud: " + player.bullets, 230, height - 25);
     
     text("Point: " + player.points, 390, height - 25);
     

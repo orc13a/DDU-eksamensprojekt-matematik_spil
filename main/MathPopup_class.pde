@@ -16,6 +16,8 @@ class MathPopup extends Component {
   //Input input;
 
   MathPopup(Level l) {
+    level = l;
+    
     x = width / 2;
     y = height / 2;
     w = 300;

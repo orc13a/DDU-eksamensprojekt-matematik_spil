@@ -3,22 +3,21 @@ class Player extends Component {
   PVector v;
   float angle = 0.15;
   float rotation = 0;
+  float hitboxSize = 20;
+  float fuel = 100;
+  float fuelCap = 100;
+  
   boolean isBoosting = false;
   boolean isShooting = false;
   boolean displayMirrorPlayer = false;
-  
-  int hp = 3;
-  
-  float hitboxSize = 20;
+  boolean isStoped = false;
   
   ArrayList<Bullet> allBullets = new ArrayList<Bullet>();
-  
-  float fuel = 100;
-  float fuelCap = 100;
   
   int bullets = 100;
   int bulletsCap = 100;
   int points = 0;
+  int hp = 3;
 
   Player() {
     pos = new PVector(width/2, height/2);
@@ -65,8 +64,10 @@ class Player extends Component {
       }
     }
 
-    pos.add(vel);
-    vel.mult(0.99);
+    if (isStoped == false) {
+      pos.add(vel);
+      vel.mult(0.99);
+    }
 
     edgeCheck();
     
@@ -106,8 +107,13 @@ class Player extends Component {
     //}
   }
 
-  void throttle() {
+  void throttle() {    
     PVector force = new PVector().fromAngle(heading);
+    
+    if (isStoped == true) {
+      isStoped = false;
+    }
+    
     force.mult(0.1);
     vel.add(force);
     
