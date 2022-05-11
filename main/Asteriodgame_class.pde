@@ -15,7 +15,7 @@ class Asteriodgame {
     player = new Player();
     level = new Level(player, tabel);
     
-    m = new MathPopup("Hvad er 2 ⋅ 2?", 4, tabel);
+    //m = new MathPopup("Hvad er 2 ⋅ 2?", 4, tabel, level);
   }
   
   void run() {
@@ -37,7 +37,7 @@ class Asteriodgame {
   void update() {
     //player.update();
     level.update();
-    m.update();
+    //m.update();
   }
   
   void ui() {
@@ -66,6 +66,14 @@ class Asteriodgame {
   }
   
   void controls() {
-    player.controls();
+    if (level.isLevelPaused == false) {
+      player.controls();
+    }
+  }
+  
+  void controlsReleased() {
+    if (level.isLevelPaused == false) {
+      player.controlsReleased();
+    }
   }
 }

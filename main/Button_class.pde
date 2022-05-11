@@ -12,6 +12,7 @@ class Button extends Component {
 
   void display() {
     if (isHidden == false) {
+      rectMode(CENTER);
       fill(0);
       rect(x, y, w, h, 10);
       fill(255);
@@ -32,7 +33,7 @@ class Button extends Component {
 
   boolean clicked() {
     if (mousePressed && isHidden == false) {
-      if (mouseX >= (x - w/2) && mouseX <= (w + w/2) && mouseY >= (y - h/2) && mouseY <= (w + h/2)) {
+      if (mouseX >= (x - w/2) && mouseX <= (x + w/2) && mouseY >= (y - h/2) && mouseY <= (y + h/2)) {
         return true;
       } else {
         return false;

@@ -1,20 +1,27 @@
 class TankStation extends Component {
   Player player;
+  Level level;
 
   float fuel = random(20, 60);
   boolean hasGivenFuel = false; 
+  
+  MathPopup question;
 
-  TankStation(PVector pos_, Player p) {
+  TankStation(PVector pos_, Player p, Level l) {
     pos = new PVector(pos_.x, pos_.y);
     w = 60;
     h = 60;
     player = p;
+    level = l;
+    
+    question = new MathPopup(level);
   }
 
   void display () {
     if (hasGivenFuel == false) {
       pushMatrix();
       translate(pos.x, pos.y);
+      fill(0);
       rect(0, 0, w, h);
       popMatrix();
     }

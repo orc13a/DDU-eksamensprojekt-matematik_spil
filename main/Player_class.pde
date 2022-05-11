@@ -22,7 +22,6 @@ class Player extends Component {
 
   Player() {
     pos = new PVector(width/2, height/2);
-
     vel = new PVector(0, 0);
   }
 

@@ -74,7 +74,7 @@ class Input extends Component {
 
   boolean clicked() {
     //if (mousePressed && isHidden == false) {
-      if (mousePressed && mouseX >= (x - w/2) && mouseX <= (w + w/2) && mouseY >= (y - h/2) && mouseY <= (w + h/2)) {
+      if (mousePressed && mouseX >= (x - w/2) && mouseX <= (x + w/2) && mouseY >= (y - h/2) && mouseY <= (y + h/2)) {
         return true;
       } else {
         return false;

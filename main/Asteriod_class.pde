@@ -84,7 +84,7 @@ class Asteriod extends Component {
       for (TankStation t : level.allTankStations) {
         float dist = dist(pos.x, pos.y, t.pos.x, t.pos.y);
         
-        if (dist < size/2) {
+        if (dist < size) {
           destroyed = true;
         }
       }

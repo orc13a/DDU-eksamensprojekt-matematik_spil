@@ -11,7 +11,7 @@ void draw() {
 }
 
 void keyReleased() {
-  game.player.controlsReleased();
+  game.controlsReleased();
 }
 
 void keyPressed() {
