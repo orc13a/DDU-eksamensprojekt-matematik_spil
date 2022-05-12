@@ -1,15 +1,18 @@
 class Input extends Component {
   boolean isActive = false;
-  boolean showBlinkCursor = false;
+  boolean showBlinkCursor = true;
   boolean isHidden = true;
 
   String userInput = "";
+  
+  int maxLength;
 
-  Input(float x_, float y_, float w_, float h_) {
+  Input(float x_, float y_, float w_, float h_, int maxLength_) {
     x = x_;
     y = y_;
     w = w_;
     h = h_;
+    maxLength = maxLength_;
   }
 
   void display() {
@@ -39,7 +42,7 @@ class Input extends Component {
     if (isHidden == false && isActive == true && keyPressed) {
       if (key == BACKSPACE && key != ENTER && userInput.length() > 0) {
         userInput = userInput.substring(0, userInput.length() - 1);
-      } else if (key != BACKSPACE && key != ENTER) {
+      } else if (key != BACKSPACE && key != ENTER && userInput.length() < maxLength) {
         userInput += key;
       }
     }
@@ -47,7 +50,7 @@ class Input extends Component {
 
   void InputCursor() {
     if (isActive == true && isHidden == false) {
-      if (frameCount % 60 == 0) {
+      if (frameCount % 40 == 0) {
         if (showBlinkCursor == true) {
           showBlinkCursor = false;
         } else {
