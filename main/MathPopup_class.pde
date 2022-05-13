@@ -20,7 +20,7 @@ class MathPopup extends Component {
     
     x = width / 2;
     y = height / 2;
-    w = 300;
+    w = 350;
     h = 200;
     tabel = level.tabel;
     level = l;
@@ -41,7 +41,7 @@ class MathPopup extends Component {
       rect(x, y, w, h, 10);
       noStroke();
       fill(0);
-      textSize(20);
+      textSize(18);
       textAlign(CENTER);
       text(text, x, y - 50);
       textAlign(LEFT);

@@ -23,7 +23,11 @@ class Bullet extends Component {
   void display() {
     if (isDisplayed == true) {
       pushMatrix();
-      stroke(0);
+      if (isEnemyBullet == true) {
+        stroke(#fc0303);
+      } else {
+        stroke(#3cff00);
+      }
       strokeWeight(4);
       point(pos.x, pos.y);
       noStroke();

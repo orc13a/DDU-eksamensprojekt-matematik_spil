@@ -19,7 +19,7 @@ class LeaderboardUser extends Component {
 
   void display() {
     textAlign(CENTER);
-    fill(0);
+    fill(255);
     textSize(20);
     if (showWidthId == true) {
       text(id, width/4, y);

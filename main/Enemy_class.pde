@@ -2,7 +2,7 @@ class Enemy extends Component {
   Player player;
 
   float heading = 0;
-  float hitboxSize = 20;
+  float hitboxSize = 50;
   float angle = 0;
   float targetAngle = 0;
 
@@ -17,6 +17,8 @@ class Enemy extends Component {
 
     pos = new PVector(random(50, width-50), random(-100, -150));
     vel = new PVector(0, 0);
+    
+    image = loadImage("enemy.png");
   }
 
   void display() {
@@ -26,9 +28,10 @@ class Enemy extends Component {
       strokeWeight(1);
       translate(pos.x, pos.y);
       rotate(targetAngle + radians(90));
-      fill(0);
-      rect(0, 0, hitboxSize, hitboxSize);
-      line(0, 0, 0, -10);
+      //fill(0);
+      //rect(0, 0, hitboxSize, hitboxSize);
+      //line(0, 0, 0, -10);
+      image(image, 0, 0, hitboxSize, hitboxSize);
       popMatrix();
     }
 
@@ -100,6 +103,7 @@ class Enemy extends Component {
           isDisplayed = false;
           b.isDisplayed = false;
           player.points += 100;
+          allBullets.clear();
         }
       }
     }

@@ -15,14 +15,16 @@ class Button extends Component {
   void display() {
     if (isHidden == false) {
       rectMode(CENTER);
-      fill(0);
-      rect(x, y, w, h, 10);
       fill(255);
-      textAlign(CENTER);
-      textSize(18);
-      stroke(255);
+      stroke(0);
       strokeWeight(1);
-      text(text, x, y + 7);
+      rect(x, y, w, h, 10);
+      fill(0);
+      textAlign(CENTER);
+      textSize(16);
+      stroke(0);
+      strokeWeight(1);
+      text(text, x, y + 10);
       noStroke();
       textSize(12);
       textAlign(LEFT);

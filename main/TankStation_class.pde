@@ -14,6 +14,8 @@ class TankStation extends Component {
     player = p;
     level = l;
     
+    image = loadImage("fuelIcon.png");
+    
     question = new MathPopup(level);
   }
 
@@ -21,8 +23,9 @@ class TankStation extends Component {
     if (hasGivenFuel == false) {
       pushMatrix();
       translate(pos.x, pos.y);
-      fill(0);
-      rect(0, 0, w, h);
+      //fill(0);
+      //rect(0, 0, w, h);
+      image(image, 0, 0, w, h);
       popMatrix();
     }
   }

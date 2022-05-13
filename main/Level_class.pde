@@ -119,6 +119,7 @@ class Level {
       isLevelPaused = true;
       player.isStoped = true;
       player.isBoosting = false;
+      player.isShooting = false;
     }
 
     if (isLevelPaused == true && frameCount > 240) {

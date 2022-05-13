@@ -5,7 +5,7 @@ class Player extends Component {
   PVector v;
   float angle = 0.15;
   float rotation = 0;
-  float hitboxSize = 20;
+  float hitboxSize = 50;
   float fuel = 100;
   float fuelCap = 100;
   
@@ -24,27 +24,29 @@ class Player extends Component {
   Player() {
     pos = new PVector(width/2, height/2);
     vel = new PVector(0, 0);
+    image = loadImage("player.png");
   }
 
   void display() {
     fill(255);
+    
+    for (Bullet b : allBullets) {
+      b.display();
+    }
     
     pushMatrix();
     stroke(0);
     strokeWeight(1);
     translate(pos.x, pos.y);
     rotate(heading + PI / 2);
-    rect(0, 0, hitboxSize, hitboxSize);
-    line(0, 0, 0, -10);
+    //rect(0, 0, hitboxSize, hitboxSize);
+    //line(0, 0, 0, -10);
+    image(image, 0, 0, hitboxSize, hitboxSize);
     popMatrix();
 
-    if (displayMirrorPlayer) {
-      edgeCheck();
-    }
-    
-    for (Bullet b : allBullets) {
-      b.display();
-    }
+    //if (displayMirrorPlayer) {
+    //  edgeCheck();
+    //}
   }
 
   void update() {

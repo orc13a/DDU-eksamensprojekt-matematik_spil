@@ -23,6 +23,11 @@ class Asteriodgame {
 
   ArrayList<Button> allMultiTabelButtons = new ArrayList<Button>();
   ArrayList<LeaderboardUser> allLeaderboardUsers = new ArrayList<LeaderboardUser>();
+  
+  PImage backgroundImage;
+  PImage hpHeartImage;
+  
+  PFont pressStart2D;
 
   Asteriodgame(PApplet PObj) {
     PObject = PObj;
@@ -34,12 +39,18 @@ class Asteriodgame {
     rectMode(CENTER);
     player = new Player();
     //level = new Level(player, 0);
+    
+    backgroundImage = loadImage("startfield.png");
+    hpHeartImage = loadImage("heart.png");
+    
+    pressStart2D = createFont("PressStart2P-Regular.ttf", 12);
+    textFont(pressStart2D);
 
-    startBtn = new Button("Start", width/2, height/2, 100, 40);
+    startBtn = new Button("Start", width/2, height/2, 150, 40);
     saveScoreBtn = new Button("Gem", width/2, height/2 + 75, 100, 40);
-    exitBtn = new Button("Afslut", width/4, height - 100, 100, 40);
-    playAgainBtn = new Button("Spil igen", width/4 * 2, height - 100, 100, 40);
-    leaderBoardBtn = new Button("Leaderboard", width/4 * 3, height - 100, 150, 40);
+    exitBtn = new Button("Afslut", width/4, height - 50, 125, 40);
+    playAgainBtn = new Button("Spil igen", width/2, height - 125, 175, 40);
+    leaderBoardBtn = new Button("Leaderboard", width/4 * 3, height - 50, 225, 40);
 
     for (int i = 1; i <= 5; i++) {
       Button b = new Button(str(i), 0 + (i * 100), (height/2) - 50, 50, 50);
@@ -65,7 +76,8 @@ class Asteriodgame {
 
   void display() {
     clear();
-    background(255);
+    //background(255);
+    image(backgroundImage, width/2, height/2);
 
     if (showStartScreen == true && runGame == false && showGameOverScreen == false) {
       startScreen();
@@ -169,11 +181,16 @@ class Asteriodgame {
       }
 
       if (saveScoreBtn.clicked() == true && saveScoreInput.userInput.length() > 0) {
+        // Vi prøver at gøre dette i scoped
         try {
+          // Skal "forbindelse" til den lokale database
           SQLite db = new SQLite(PObject, "database.sqlite");
 
+          // Hvis der bliver skabt en forbindelse
           if (db.connect()) {
+            // Opretter vores SQL query
             db.query("INSERT INTO leaderboard VALUES (null, \"" + saveScoreInput.userInput + "\", " + savedScore + ");");
+            // Når den er fuldført lukker forbindelsen igen til databasen.
             db.close();
 
             player = new Player();
@@ -188,7 +205,7 @@ class Asteriodgame {
 
             showLeaderBoardScreen = true;
           }
-        } 
+        } // Hvis den fejler fander vi fejlen uden programmet stopper (crasher)
         catch(Exception e) {
           println(e);
         }
@@ -199,8 +216,8 @@ class Asteriodgame {
   void startScreen() {
     startBtn.setHidden(false);
 
-    fill(0);
-    textSize(40);
+    fill(255);
+    textSize(36);
     textAlign(CENTER);
     text("Matematik spil", width/2, 100);
     textSize(12);
@@ -212,8 +229,8 @@ class Asteriodgame {
   }
 
   void selectMuliTableScreen() {
-    fill(0);
-    textSize(40);
+    fill(255);
+    textSize(36);
     textAlign(CENTER);
     text("Matematik spil", width/2, 100);
     textSize(20);
@@ -234,8 +251,8 @@ class Asteriodgame {
 
     saveScoreInput.setHidden(false);
 
-    fill(0);
-    textSize(40);
+    fill(255);
+    textSize(36);
     textAlign(CENTER);
     text("GAME OVER", width/2, 100);
     textSize(20);
@@ -268,8 +285,8 @@ class Asteriodgame {
     exitBtn.setHidden(false);
     playAgainBtn.setHidden(false);
 
-    fill(0);
-    textSize(40);
+    fill(255);
+    textSize(36);
     textAlign(CENTER);
     text("Leaderboard", width/2, 100);
 
@@ -285,7 +302,7 @@ class Asteriodgame {
       }
     } else {
       textAlign(CENTER);
-      textSize(26);
+      textSize(20);
       text("Intentialer", width/3, 200);
       text("Point", width/3 * 2, 200);
       textSize(12);
@@ -302,27 +319,29 @@ class Asteriodgame {
 
   void ui() {
     // Brandstof
-    fill(0);
+    fill(255);
+    textSize(10);
     text("Brandstof: ", 25, height - 25);
     rectMode(CORNER);
     noFill();
-    stroke(0);
+    stroke(255);
     strokeWeight(1);
-    rect(90, height - 40, player.fuelCap, 20);
-    fill(0);
-    rect(90, height - 40, player.fuel, 20);
+    rect(130, height - 40, player.fuelCap, 20);
+    fill(255);
+    rect(130, height - 40, player.fuel, 20);
     rectMode(CENTER);
 
     // Skud
     //text("Skud: " + player.bullets + " / " + player.bulletsCap, 230, height - 25);
-    text("Skud: " + player.bullets, 230, height - 25);
+    text("Skud: " + player.bullets, width/2, height - 25);
 
-    text("Point: " + player.points, 390, height - 25);
+    text("Points: " + player.points, 450, height - 50);
 
     // Liv
-    text("Liv: ", 500, height - 25);
+    text("Liv: ", 450, height - 25);
     for (int i = 1; i <= player.hp; i++) {
-      rect(525 + (15 * i), height - 30, 10, 10);
+      //rect(525 + (15 * i), height - 30, 10, 10);
+      image(hpHeartImage, 480 + (30 * i), height - 30, 20, 20);
     }
   }
   
