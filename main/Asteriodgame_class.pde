@@ -217,9 +217,9 @@ class Asteriodgame {
     startBtn.setHidden(false);
 
     fill(255);
-    textSize(36);
+    textSize(28);
     textAlign(CENTER);
-    text("Matematik spil", width/2, 100);
+    text("Matematik Asteroids", width/2, 100);
     textSize(12);
     textAlign(LEFT);
 
@@ -230,11 +230,15 @@ class Asteriodgame {
 
   void selectMuliTableScreen() {
     fill(255);
-    textSize(36);
+    textSize(28);
     textAlign(CENTER);
-    text("Matematik spil", width/2, 100);
+    text("Matematik Asteroids", width/2, 100);
     textSize(20);
-    text("Vælg tabel du vil øve", width/2, 150);
+    text("Vælg den tabel du vil øve", width/2, 150);
+    textSize(16);
+    text("[W] for fremdrift", width/2, height-200);
+    text("[A] og [D] for at dreje", width/2, height-150);
+    text("[MELLEMRUM] for at skyde", width/2, height-100);
     textSize(12);
     textAlign(LEFT);
 

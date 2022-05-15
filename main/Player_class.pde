@@ -43,10 +43,6 @@ class Player extends Component {
     //line(0, 0, 0, -10);
     image(image, 0, 0, hitboxSize, hitboxSize);
     popMatrix();
-
-    //if (displayMirrorPlayer) {
-    //  edgeCheck();
-    //}
   }
 
   void update() {
@@ -103,12 +99,6 @@ class Player extends Component {
     } else if (pos.y <= hitboxSize/2) {
       pos.y = hitboxSize/2;
     }
-    
-    //if (pos.y >= height + hitboxSize) {
-    //  pos.y = -hitboxSize;
-    //} else if (pos.y <= -hitboxSize) {
-    //  pos.y = height + hitboxSize;
-    //}
   }
 
   void throttle() {    
